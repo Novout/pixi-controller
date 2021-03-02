@@ -1,6 +1,7 @@
 import Events from 'nom-events';
+
 export default class Keyboard {
-  private keyStates: Map<any, any>;
+  private keyStates: Map<() => KeyboardEvent, any>;
   private events: any;
   private keyDownListener = (event: any) => {
     if (!this.keyStates.get(event.code)) {

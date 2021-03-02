@@ -7,8 +7,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "lint": "eslint src/**/*.{js,ts,tsx} --fix",
-    "docs": "typedoc --categorizeByGroup --exclude \"**/(__tests__|lib)/*.ts\""
+    "lint": "eslint src/**/*.{js,ts,tsx} --fix"
   },
   "keywords": [],
   "author": "Novout",
@@ -32,7 +31,6 @@
     "rollup-plugin-dts": "^2.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.29.0",
-    "typedoc": "^0.20.20",
     "typescript": "^4.1.3"
   },
   "files": [

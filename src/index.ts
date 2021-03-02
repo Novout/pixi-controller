@@ -1,7 +1,6 @@
 import Mouse from './mouse';
 import Keyboard from './keyboard';
-
-class PIXIController {
+export class PIXIController {
   public Mouse: Mouse;
   public Keyboard: Keyboard;
 

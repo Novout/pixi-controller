@@ -7,18 +7,17 @@ interface MouseButton {
   FOURTH: number;
   FIFTH: number;
 }
-
 export default class Mouse {
   // @ts-ignore
   private canvasElement: HTMLCanvasElement;
   public Button: MouseButton;
-  private posLocalY: any;
-  private posLocalX: any;
-  private posGlobalX: any;
-  private posGlobalY: any;
-  private buttonStates: Map<any, any>;
+  private posLocalY = 0;
+  private posLocalX = 0;
+  private posGlobalX = 0;
+  private posGlobalY = 0;
+  private buttonStates: Map<() => MouseEvent, any>;
   private events: any;
-  private mouseMoveListener = (event: any) => {
+  private mouseMoveListener = (event: MouseEvent) => {
     if (this.posLocalX != event.clientX || this.posLocalY != event.clientY) {
       this.events.call('move', event.clientX, this.posLocalY);
       this.events.call('moveLocal', event.clientX, this.posLocalY);
@@ -38,6 +37,7 @@ export default class Mouse {
       event.posLocalX = this.getPosLocalX();
       event.posLocalY = this.getPosLocalY();
       this.buttonStates.set(buttonCode, event);
+      console.log(this.buttonStates);
       this.events.call('pressed', buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
       this.events.call('pressed_' + buttonCode, buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
     }
