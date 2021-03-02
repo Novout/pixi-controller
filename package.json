@@ -5,7 +5,10 @@
   "main": "lib/index.amd.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
-  "repository": "git://github.com/Novout/pixi-controller.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Novout/pixi-controller"
+  },
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint src/**/*.{js,ts,tsx} --fix",
@@ -57,8 +60,5 @@
     "*.{js,ts,tsx}": [
       "npm run lint"
     ]
-  },
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
   }
 }
