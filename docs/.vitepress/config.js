@@ -1,5 +1,5 @@
 module.exports = {
-  base: '/pixi.js-controller',
+  base: '/pixi.js-controller/',
   title: 'Pixi.js Controller',
   description: 'Set of controls for Pixi.js to facilitate general handling of external events.',
   lang: 'en-US',
