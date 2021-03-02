@@ -5,6 +5,7 @@
   "main": "lib/index.amd.js",
   "module": "lib/index.js",
   "types": "lib/index.d.ts",
+  "repository": "git://github.com/Novout/pixi-controller.git",
   "scripts": {
     "build": "rollup -c",
     "lint": "eslint src/**/*.{js,ts,tsx} --fix",
