@@ -8,11 +8,11 @@ Set of controls for Pixi.js to facilitate general handling of external events.
 ## Install
 
 ```shell
-npm install pixi.js pixi.js-controller
+npm install pixi.js pixi-controller
 
 or
 
-yarn add pixi.js pixi.js-controller
+yarn add pixi.js pixi-controller
 ```
 
 ## Basic Example
