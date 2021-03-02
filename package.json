@@ -2,8 +2,8 @@
   "name": "pixi.js-controller",
   "version": "1.0.0",
   "description": "Set of controls for Pixi.js to facilitate general handling of external events.",
-  "main": "lib/index.js",
-  "module": "lib/index.esm.js",
+  "main": "lib/index.amd.js",
+  "module": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "rollup -c",
