@@ -1,5 +1,7 @@
 # PIXI.JS Controller
 
+![License Badge](https://img.shields.io/github/license/Novout/pixi-controller) ![Version Badge](https://img.shields.io/npm/v/pixi-controller) ![Bundle Badge](https://img.shields.io/bundlephobia/min/pixi-controller)
+
 Set of controls for Pixi.js to facilitate general handling of external events.
 
 - [pixi-controller](https://github.com/Novout/pixi-controller) is based on [pixi.js-mouse](https://www.npmjs.com/package/pixi.js-mouse) and [pixi.js-keyboard](https://www.npmjs.com/package/pixi.js-keyboard)

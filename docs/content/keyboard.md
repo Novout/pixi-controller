@@ -1,6 +1,6 @@
 # Keyboard
 
-## isKeyDown('KeyW')]
+## isKeyDown('KeyW')
 
 Checks if the key is held.
 
@@ -25,7 +25,7 @@ Clear internal events
 Insert events on a new canvas, deleting older events
 
 ```js
-import Controller from 'pixi.js-controller';
+import Controller from 'pixi-controller';
 
 const app = new PIXI.Application();
 

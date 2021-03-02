@@ -1,6 +1,8 @@
 # Mouse
 
-## .Button = {LEFT: 0, MIDDLE: 1, RIGHT: 2, FOURTH: 3, FIFTH: 4}
+## .Button
+
+.Button = {LEFT: 0, MIDDLE: 1, RIGHT: 2, FOURTH: 3, FIFTH: 4}
 
 Bind for specific button.
 
