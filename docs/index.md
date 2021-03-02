@@ -7,7 +7,7 @@ Set of controls for Pixi.js to facilitate general handling of external events.
 
 ## Install
 
-```sh
+```shell
 npm install pixi.js pixi.js-controller
 
 or

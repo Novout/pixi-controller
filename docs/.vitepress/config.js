@@ -6,7 +6,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'API', link: '/content' },
+      { text: 'API', link: '/content/keyboard' },
       { text: 'Examples', link: '/examples' }
     ],
     sidebar: {

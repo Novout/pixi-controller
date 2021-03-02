@@ -4,15 +4,21 @@
 
 Bind for specific button.
 
-## .isButtonDown( Mouse.isButtonDown(Mouse.Button.LEFT) )
+## .isButtonDown()
+
+.isButtonDown(Controller.Mouse.isButtonDown(Mouse.Button.LEFT) )
 
 Checks if the key is held.
 
-## .isButtonPressed( Mouse.isButtonDown(Mouse.Button.LEFT) )
+## .isButtonPressed()
+
+.isButtonPressed(Controller.Mouse.isButtonDown(Mouse.Button.LEFT) )
 
 Checks if the key was pressed, holding will not trigger this more than once.
 
-## .isButtonReleased( Mouse.isButtonDown(Mouse.Button.LEFT) )
+## .isButtonReleased()
+
+.isButtonReleased(Controller.Mouse.isButtonDown(Mouse.Button.LEFT))
 
 Checks whether the key was just released.
 
