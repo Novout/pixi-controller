@@ -2,9 +2,9 @@
 
 Set of controls for Pixi.js to facilitate general handling of external events.
 
-- [pixi.js-controller](https://github.com/Novout/pixi.js-controller) is based on [pixi.js-mouse](https://www.npmjs.com/package/pixi.js-mouse) and [pixi.js-keyboard](https://www.npmjs.com/package/pixi.js-keyboard)
+- [pixi.js-controller](https://github.com/Novout/pixi-js-controller) is based on [pixi.js-mouse](https://www.npmjs.com/package/pixi.js-mouse) and [pixi.js-keyboard](https://www.npmjs.com/package/pixi.js-keyboard)
 - Standard format is `ESModules` and the `AMD` format is available at `index.amd.js`
-- [Documentation is here](https://novout.github.io/pixi.js-controller/)
+- [Documentation is here](https://novout.github.io/pixi-js-controller/)
 
 ## Install
 

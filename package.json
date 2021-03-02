@@ -18,6 +18,9 @@
   ],
   "author": "Novout",
   "license": "MIT",
+  "dependencies": {
+    "nom-events": "^1.0.2"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
@@ -54,7 +57,7 @@
       "npm run lint"
     ]
   },
-  "dependencies": {
-    "nom-events": "^1.0.2"
+  "publishConfig": {
+    "registry":"https://npm.pkg.github.com"
   }
 }
