@@ -18,7 +18,6 @@ const createConfig = () => {
         file: `./lib${option}/index.js`,
         format: 'esm',
         exports: 'named',
-        sourcemap: true,
       },
       plugins: createPlugins(),
     });
@@ -29,7 +28,6 @@ const createConfig = () => {
         file: `./lib${option}/index.amd.js`,
         format: 'amd',
         exports: 'named',
-        sourcemap: true,
       },
       plugins: createPlugins(),
     });
