@@ -1,7 +1,7 @@
 {
   "name": "pixi.js-controller",
   "version": "1.0.0",
-  "description": "",
+  "description": "Set of controls for Pixi.js to facilitate general handling of external events.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "types": "lib/index.d.ts",
