@@ -1,10 +1,14 @@
 import Mouse from './mouse';
 
 class PIXIController {
-  public MouseController: Mouse;
+  public Mouse: Mouse;
 
   constructor() {
-    this.MouseController = new Mouse();
+    this.Mouse = new Mouse();
+  }
+
+  public update() {
+    this.Mouse.update();
   }
 }
 

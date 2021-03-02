@@ -9,84 +9,84 @@ interface MouseButton {
 }
 
 export default class Mouse {
+  // @ts-ignore
   private canvasElement: HTMLCanvasElement;
-  private Button: MouseButton;
+  public Button: MouseButton;
   private posLocalY: any;
   private posLocalX: any;
   private posGlobalX: any;
   private posGlobalY: any;
   private buttonStates: Map<any, any>;
   private events: any;
+  private mouseMoveListener = (event: any) => {
+    if (this.posLocalX != event.clientX || this.posLocalY != event.clientY) {
+      this.events.call('move', event.clientX, this.posLocalY);
+      this.events.call('moveLocal', event.clientX, this.posLocalY);
+      this.posLocalX = event.clientX;
+      this.posLocalY = event.clientY;
+    }
+
+    if (this.posGlobalX != event.screenX || this.posGlobalY != event.screenY) {
+      this.events.call('moveGlobal', event.screenX, event.screenY);
+      this.posGlobalX = event.screenX;
+      this.posGlobalY = event.screenY;
+    }
+  };
+  private mouseDownListener = (event: any) => {
+    const buttonCode = event.button;
+    if (!this.buttonStates.get(buttonCode)) {
+      event.posLocalX = this.getPosLocalX();
+      event.posLocalY = this.getPosLocalY();
+      this.buttonStates.set(buttonCode, event);
+      this.events.call('pressed', buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
+      this.events.call('pressed_' + buttonCode, buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
+    }
+  };
+  private mouseUpListener = (event: any) => {
+    const buttonCode = event.button;
+    event = this.buttonStates.get(buttonCode);
+    if (event) {
+      event.wasReleased = true;
+      this.events.call(
+        'released',
+        buttonCode,
+        event,
+        this.getPosLocalX(),
+        this.getPosLocalY(),
+        event.posLocalX,
+        event.posLocalY,
+        this.getPosLocalX() - event.posLocalX,
+        this.getPosLocalY() - event.posLocalY,
+      );
+      this.events.call(
+        'released_' + buttonCode,
+        buttonCode,
+        event,
+        this.getPosLocalX(),
+        this.getPosLocalY(),
+        event.posLocalX,
+        event.posLocalY,
+        this.getPosLocalX() - event.posLocalX,
+        this.getPosLocalY() - event.posLocalY,
+      );
+    }
+  };
 
   constructor() {
     this.Button = { LEFT: 0, MIDDLE: 1, RIGHT: 2, FOURTH: 3, FIFTH: 4 };
-    this.canvasElement = document.getElementsByTagName('canvas')[0];
-
-    if (!this.canvasElement) throw new Error('<canvas /> element not exist!');
-
     this.buttonStates = new Map();
     this.events = new Events();
 
-    this.canvasElement.addEventListener('mousemove', (event: MouseEvent) => {
-      if (this.posLocalX != event.clientX || this.posLocalY != event.clientY) {
-        this.events.call('move', event.clientX, this.posLocalY);
-        this.events.call('moveLocal', event.clientX, this.posLocalY);
-        this.posLocalX = event.clientX;
-        this.posLocalY = event.clientY;
-      }
+    setTimeout(() => {
+      this.canvasElement = document.getElementsByTagName('canvas')[0];
 
-      if (this.posGlobalX != event.screenX || this.posGlobalY != event.screenY) {
-        this.events.call('moveGlobal', event.screenX, event.screenY);
-        this.posGlobalX = event.screenX;
-        this.posGlobalY = event.screenY;
-      }
-    });
+      this.canvasElement.addEventListener('mousemove', this.mouseMoveListener);
 
-    this.canvasElement.addEventListener('mousedown', (event: any) => {
-      const buttonCode = event.button;
-      if (!this.buttonStates.get(buttonCode)) {
-        event.posLocalX = this.getPosLocalX();
-        event.posLocalY = this.getPosLocalY();
-        this.buttonStates.set(buttonCode, event);
-        this.events.call('pressed', buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
-        this.events.call('pressed_' + buttonCode, buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
-      }
-    });
+      this.canvasElement.addEventListener('mousedown', this.mouseDownListener);
 
-    this.canvasElement.addEventListener('mouseup', (event: any) => {
-      const buttonCode = event.button;
-      event = this.buttonStates.get(buttonCode);
-      if (event) {
-        event.wasReleased = true;
-        this.events.call(
-          'released',
-          buttonCode,
-          event,
-          this.getPosLocalX(),
-          this.getPosLocalY(),
-          event.posLocalX,
-          event.posLocalY,
-          this.getPosLocalX() - event.posLocalX,
-          this.getPosLocalY() - event.posLocalY,
-        );
-        this.events.call(
-          'released_' + buttonCode,
-          buttonCode,
-          event,
-          this.getPosLocalX(),
-          this.getPosLocalY(),
-          event.posLocalX,
-          event.posLocalY,
-          this.getPosLocalX() - event.posLocalX,
-          this.getPosLocalY() - event.posLocalY,
-        );
-      }
-    });
+      this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
+    }, 0);
   }
-
-  public getMouseButton = (): MouseButton => {
-    return this.Button;
-  };
 
   public getMousePos(event: any) {
     const rect = this.canvasElement.getBoundingClientRect();
@@ -121,121 +121,25 @@ export default class Mouse {
   }
 
   public clear() {
-    this.canvasElement = document.getElementsByTagName('canvas')[0];
     this.buttonStates.clear();
+  }
+
+  public reset() {
+    this.canvasElement = document.getElementsByTagName('canvas')[0];
+    this.clear();
     this.events = new Events();
 
-    this.canvasElement.removeEventListener('mousemove', (event: any) => {
-      if (this.posLocalX != event.clientX || this.posLocalY != event.clientY) {
-        this.events.call('move', event.clientX, this.posLocalY);
-        this.events.call('moveLocal', event.clientX, this.posLocalY);
-        this.posLocalX = event.clientX;
-        this.posLocalY = event.clientY;
-      }
+    this.canvasElement.removeEventListener('mousemove', this.mouseMoveListener);
 
-      if (this.posGlobalX != event.screenX || this.posGlobalY != event.screenY) {
-        this.events.call('moveGlobal', event.screenX, event.screenY);
-        this.posGlobalX = event.screenX;
-        this.posGlobalY = event.screenY;
-      }
-    });
+    this.canvasElement.removeEventListener('mousedown', this.mouseDownListener);
 
-    this.canvasElement.removeEventListener('mousedown', (event: any) => {
-      const buttonCode = event.button;
-      if (!this.buttonStates.get(buttonCode)) {
-        event.posLocalX = this.getPosLocalX();
-        event.posLocalY = this.getPosLocalY();
-        this.buttonStates.set(buttonCode, event);
-        this.events.call('pressed', buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
-        this.events.call('pressed_' + buttonCode, buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
-      }
-    });
+    this.canvasElement.removeEventListener('mouseup', this.mouseUpListener);
 
-    this.canvasElement.removeEventListener('mouseup', (event: any) => {
-      const buttonCode = event.button;
-      event = this.buttonStates.get(buttonCode);
-      if (event) {
-        event.wasReleased = true;
-        this.events.call(
-          'released',
-          buttonCode,
-          event,
-          this.getPosLocalX(),
-          this.getPosLocalY(),
-          event.posLocalX,
-          event.posLocalY,
-          this.getPosLocalX() - event.posLocalX,
-          this.getPosLocalY() - event.posLocalY,
-        );
-        this.events.call(
-          'released_' + buttonCode,
-          buttonCode,
-          event,
-          this.getPosLocalX(),
-          this.getPosLocalY(),
-          event.posLocalX,
-          event.posLocalY,
-          this.getPosLocalX() - event.posLocalX,
-          this.getPosLocalY() - event.posLocalY,
-        );
-      }
-    });
+    this.canvasElement.addEventListener('mousemove', this.mouseMoveListener);
 
-    this.canvasElement.addEventListener('mousemove', (event) => {
-      if (this.posLocalX != event.clientX || this.posLocalY != event.clientY) {
-        this.events.call('move', event.clientX, this.posLocalY);
-        this.events.call('moveLocal', event.clientX, this.posLocalY);
-        this.posLocalX = event.clientX;
-        this.posLocalY = event.clientY;
-      }
+    this.canvasElement.addEventListener('mousedown', this.mouseDownListener);
 
-      if (this.posGlobalX != event.screenX || this.posGlobalY != event.screenY) {
-        this.events.call('moveGlobal', event.screenX, event.screenY);
-        this.posGlobalX = event.screenX;
-        this.posGlobalY = event.screenY;
-      }
-    });
-
-    this.canvasElement.addEventListener('mousedown', (event: any) => {
-      const buttonCode = event.button;
-      if (!this.buttonStates.get(buttonCode)) {
-        event.posLocalX = this.getPosLocalX();
-        event.posLocalY = this.getPosLocalY();
-        this.buttonStates.set(buttonCode, event);
-        this.events.call('pressed', buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
-        this.events.call('pressed_' + buttonCode, buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
-      }
-    });
-
-    this.canvasElement.addEventListener('mouseup', (event: any) => {
-      const buttonCode = event.button;
-      event = this.buttonStates.get(buttonCode);
-      if (event) {
-        event.wasReleased = true;
-        this.events.call(
-          'released',
-          buttonCode,
-          event,
-          this.getPosLocalX(),
-          this.getPosLocalY(),
-          event.posLocalX,
-          event.posLocalY,
-          this.getPosLocalX() - event.posLocalX,
-          this.getPosLocalY() - event.posLocalY,
-        );
-        this.events.call(
-          'released_' + buttonCode,
-          buttonCode,
-          event,
-          this.getPosLocalX(),
-          this.getPosLocalY(),
-          event.posLocalX,
-          event.posLocalY,
-          this.getPosLocalX() - event.posLocalX,
-          this.getPosLocalY() - event.posLocalY,
-        );
-      }
-    });
+    this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
   }
 
   public update() {
