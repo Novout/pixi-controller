@@ -1,6 +1,6 @@
 .idea
 .vscode
 lib/**
-docs
+docs/.vitepress/dist
 api
 node_modules

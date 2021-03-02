@@ -17,6 +17,19 @@ const createConfig = () => {
       output: {
         file: `./lib${option}/index.js`,
         format: 'esm',
+        exports: 'named',
+        sourcemap: true,
+      },
+      plugins: createPlugins(),
+    });
+
+    list.push({
+      input: `./src${option}/index.ts`,
+      output: {
+        file: `./lib${option}/index.amd.js`,
+        format: 'amd',
+        exports: 'named',
+        sourcemap: true,
       },
       plugins: createPlugins(),
     });

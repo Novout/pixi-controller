@@ -37,7 +37,6 @@ export default class Mouse {
       event.posLocalX = this.getPosLocalX();
       event.posLocalY = this.getPosLocalY();
       this.buttonStates.set(buttonCode, event);
-      console.log(this.buttonStates);
       this.events.call('pressed', buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
       this.events.call('pressed_' + buttonCode, buttonCode, event, this.getPosLocalX(), this.getPosLocalY());
     }
