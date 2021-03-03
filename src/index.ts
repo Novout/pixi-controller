@@ -20,4 +20,6 @@ export class PIXIController {
   }
 }
 
+export { BUTTON } from './utils';
+
 export default new PIXIController();

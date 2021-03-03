@@ -2,7 +2,7 @@
 
 ```js
 import * as PIXI from 'pixi.js';
-import Controller from 'pixi-controller';
+import Controller, { BUTTON } from 'pixi-controller';
 
 const app = new PIXI.Application();
 document.body.appendChild(app.view);
@@ -13,11 +13,11 @@ app.loader.add('example', 'example.jpg').load((loader, resources) => {
     app.stage.addChild(example);
 
     app.ticker.add(() => {
-      if(Controller.Mouse.isButtonDown(Controller.Mouse.Button.LEFT)) {
+      if(Controller.Mouse.isButtonDown(BUTTON.LEFT)) {
         console.log('left')
       }
 
-      if(Controller.Mouse.isButtonDown(Controller.Mouse.Button.RIGHT)) {
+      if(Controller.Mouse.isButtonDown(BUTTON.RIGHT)) {
         console.log('right')
       }
       

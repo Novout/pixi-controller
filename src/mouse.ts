@@ -1,12 +1,5 @@
 import Events from 'nom-events';
-
-interface MouseButton {
-  LEFT: number;
-  MIDDLE: number;
-  RIGHT: number;
-  FOURTH: number;
-  FIFTH: number;
-}
+import { MouseButton } from './types';
 export default class Mouse {
   // @ts-ignore
   private canvasElement: HTMLCanvasElement;
