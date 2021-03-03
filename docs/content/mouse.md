@@ -70,6 +70,10 @@ const newApp = new PIXI.Application();
 Controller.reset();
 ```
 
+## .prevent()
+
+Prevent mouse events in canvas/webgl context.
+
 ## .events.on(['pressed', 'released', 'down'], null, (buttonCode, event, mouseX, mouseY)
 
 Callback when any key is pressed/released/down.

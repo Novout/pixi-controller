@@ -88,35 +88,35 @@ export default class Mouse {
     };
   }
 
-  public getPosGlobalX() {
+  public getPosGlobalX(): number {
     return this.posGlobalX;
   }
 
-  public getPosGlobalY() {
+  public getPosGlobalY(): number {
     return this.posGlobalY;
   }
 
-  public getPosLocalX() {
+  public getPosLocalX(): number {
     return this.posLocalX;
   }
 
-  public getPosLocalY() {
+  public getPosLocalY(): number {
     return this.posLocalY;
   }
 
-  public getPosX() {
+  public getPosX(): number {
     return this.getPosLocalX();
   }
 
-  public getPosY() {
+  public getPosY(): number {
     return this.getPosLocalY();
   }
 
-  public clear() {
+  public clear(): void {
     this.buttonStates.clear();
   }
 
-  public reset() {
+  public reset(): void {
     this.canvasElement = document.getElementsByTagName('canvas')[0];
     this.clear();
     this.events = new Events();
@@ -134,7 +134,7 @@ export default class Mouse {
     this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
   }
 
-  public update() {
+  public update(): void {
     this.buttonStates.forEach((value, buttonCode) => {
       const event = this.buttonStates.get(buttonCode);
 
@@ -166,7 +166,7 @@ export default class Mouse {
     });
   }
 
-  public isButtonDown(...args: Array<any>) {
+  public isButtonDown(...args: Array<any>): boolean {
     let result = false;
     for (const buttonCode of args) {
       const key = this.buttonStates.get(buttonCode);
@@ -176,11 +176,11 @@ export default class Mouse {
     return result;
   }
 
-  public isButtonUp(...args: Array<any>) {
+  public isButtonUp(...args: Array<any>): boolean {
     return !this.isButtonDown(args);
   }
 
-  public isButtonPressed(...args: Array<any>) {
+  public isButtonPressed(...args: Array<any>): boolean {
     let result = false;
 
     if (args.length == 0) return false;
@@ -193,7 +193,7 @@ export default class Mouse {
     return result;
   }
 
-  public isButtonReleased(...args: Array<any>) {
+  public isButtonReleased(...args: Array<any>): boolean {
     let result = false;
 
     if (args.length == 0) return false;
@@ -204,5 +204,17 @@ export default class Mouse {
     }
 
     return result;
+  }
+
+  public prevent(): void {
+    this.canvasElement.removeEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    this.canvasElement.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
   }
 }

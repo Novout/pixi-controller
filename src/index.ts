@@ -1,25 +1,5 @@
-import Mouse from './mouse';
-import Keyboard from './keyboard';
-export class PIXIController {
-  public Mouse: Mouse;
-  public Keyboard: Keyboard;
+import { PIXIController } from './controller';
 
-  constructor() {
-    this.Mouse = new Mouse();
-    this.Keyboard = new Keyboard();
-  }
-
-  public update() {
-    this.Mouse.update();
-    this.Keyboard.update();
-  }
-
-  public reset() {
-    this.Mouse.reset();
-    this.Keyboard.reset();
-  }
-}
-
-export { BUTTON } from './utils';
+export * from './utils';
 
 export default new PIXIController();
