@@ -57,7 +57,8 @@ Clear internal events
 Insert events on a new canvas, deleting older events
 
 ```js
-import Controller from 'pixi.js-controller';
+import * as PIXI from 'pixi.js';
+import Controller from 'pixi-controller';
 
 const app = new PIXI.Application();
 
