@@ -24,7 +24,7 @@ app.ticker.add(() => {
     console.log('left')
   }
 
-  if(Controller.Mouse.isButtonDown(1)) /* Controller.Mouse.Button.RIGHT */ {
+  if(Controller.Mouse.isButtonDown(2)) /* Controller.Mouse.Button.RIGHT */ {
     console.log('right')
   }
 

@@ -1,9 +1,8 @@
 import Events from 'nom-events';
 import { MouseButton } from './types';
 export default class Mouse {
-  // @ts-ignore
-  private canvasElement: HTMLCanvasElement;
   public Button: MouseButton;
+  private canvasElement: HTMLCanvasElement;
   private posLocalY = 0;
   private posLocalX = 0;
   private posGlobalX = 0;
@@ -64,20 +63,19 @@ export default class Mouse {
     }
   };
 
-  constructor() {
+  constructor(canvas: HTMLCanvasElement) {
     this.Button = { LEFT: 0, MIDDLE: 1, RIGHT: 2, FOURTH: 3, FIFTH: 4 };
     this.buttonStates = new Map();
     this.events = new Events();
+    this.canvasElement = canvas;
 
-    setTimeout(() => {
-      this.canvasElement = document.getElementsByTagName('canvas')[0];
+    if (!this.canvasElement) throw new Error('pixi-controller: error for search <canvas /> tag.');
 
-      this.canvasElement.addEventListener('mousemove', this.mouseMoveListener);
+    this.canvasElement.addEventListener('mousemove', this.mouseMoveListener);
 
-      this.canvasElement.addEventListener('mousedown', this.mouseDownListener);
+    this.canvasElement.addEventListener('mousedown', this.mouseDownListener);
 
-      this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
-    }, 0);
+    this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
   }
 
   public getMousePos(event: any) {
