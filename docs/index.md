@@ -19,6 +19,6 @@ yarn add pixi.js pixi-controller
 
 [Home](/pixi-controller/)
 
-[API](/pixi-controller/content/keyboard.html)
+[API](/pixi-controller/content/controller.html)
 
 [Examples](/pixi-controller/examples/simple-context.html)
