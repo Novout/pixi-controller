@@ -6,27 +6,47 @@
 
 Bind for specific button.
 
-## .isButtonDown()
-
-.isButtonDown(Controller.Mouse.isButtonDown(Mouse.Button.LEFT) )
+## .isButtonDown(Button.Code)
 
 Checks if the key is held.
 
-## .isButtonPressed()
-
-.isButtonPressed(Controller.Mouse.isButtonDown(Mouse.Button.LEFT) )
+## .isButtonPressed(Button.Code)
 
 Checks if the key was pressed, holding will not trigger this more than once.
 
-## .isButtonReleased()
-
-.isButtonReleased(Controller.Mouse.isButtonDown(Mouse.Button.LEFT))
+## .isButtonReleased(Button.Code)
 
 Checks whether the key was just released.
+
+```js
+app.ticker.add(() => {
+  if(Controller.Mouse.isButtonDown(Controller.Mouse.Button.LEFT)) {
+    console.log('left')
+  }
+
+  if(Controller.Mouse.isButtonDown(1)) /* Controller.Mouse.Button.RIGHT */ {
+    console.log('right')
+  }
+
+  Controller.update();
+});
+```
 
 ## .update()
 
 Ensure to use this for correct event handling at the end of the game loop.
+
+```js
+app.ticker.add(() => {
+  // all logic...
+
+  Controller.update();
+
+  // or
+
+  Controller.Mouse.update();
+});
+```
 
 ## .clear()
 
@@ -49,26 +69,22 @@ const newApp = new PIXI.Application();
 Controller.reset();
 ```
 
-## .events.on('pressed', null, (buttonCode, event, mouseX, mouseY) => { console.log(buttonCode); })
+## .events.on(['pressed', 'released', 'down'], null, (buttonCode, event, mouseX, mouseY)
 
-Callback when any key is pressed.
+Callback when any key is pressed/released/down.
 
-## .events.on('released', null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMove) => { console.log(buttonCode); })
+## .events.on(['pressed_', 'released_', 'down_'], null, (buttonCode, event, mouseX, mouseY) => { console.log(buttonCode); })
 
-Callback when any key is released.
+Callback when a particular key is pressed/released/down.
 
-## .events.on('down', null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMoveY) => { console.log(buttonCode); })
+```js
+import Controller from 'pixi.js-controller';
 
-Callback when any key is down.
+const args = ['pressed', 'released', 'down'];
 
-## .events.on('pressed_' + Mouse.Button.LEFT, null, (buttonCode, event, mouseX, mouseY) => { console.log(buttonCode); })
-
-Callback when a particular key is pressed.
-
-## .events.on('released_' + Mouse.Button.LEFT, null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMove) => { console.log(buttonCode); })
-
-Callback when a particular key is released.
-
-## .events.on('down_' + Mouse.Button.LEFT, null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMove) => { console.log(buttonCode); })
-
-Callback when a particular key is down.
+args.forEach(arg => {
+  Controller.Mouse.events.on(arg, null, (buttonCode, event, mouseX, mouseY, mouseOriginX, mouseOriginY, mouseMoveX, mouseMoveY) => {
+    console.log('hello!');
+  });
+})
+```

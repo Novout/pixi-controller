@@ -7,7 +7,7 @@ module.exports = {
     nav: [
       { text: 'Home', link: '/' },
       { text: 'API', link: '/content/keyboard' },
-      { text: 'Examples', link: '/examples' }
+      { text: 'Examples', link: '/examples/simple-context' }
     ],
     sidebar: {
       '/content': [
@@ -15,7 +15,7 @@ module.exports = {
         { text: 'Mouse', link: '/content/mouse' }
       ],
       '/examples': [
-        { text: 'Rotation', link: '/examples/rotation' }
+        { text: 'Simple Context', link: '/examples/simple-context' }
       ]
     }
   }
