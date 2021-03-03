@@ -29,6 +29,9 @@ export class PIXIController {
 
   public setContext(_canvas: HTMLCanvasElement): void {
     this.Canvas = _canvas;
+
+    if (!this.Mouse || !this.Keyboard) throw new Error('Controller cannot be instantiable before the loader.');
+    this.Mouse.reset(_canvas);
   }
 
   public getContext(): HTMLCanvasElement {

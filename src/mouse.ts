@@ -114,8 +114,8 @@ export default class Mouse {
     this.buttonStates.clear();
   }
 
-  public reset(): void {
-    this.canvasElement = document.getElementsByTagName('canvas')[0];
+  public reset(_canvas?: HTMLCanvasElement): void {
+    _canvas ? (this.canvasElement = _canvas) : (this.canvasElement = document.getElementsByTagName('canvas')[0]);
     this.clear();
     this.events = new Events();
 
