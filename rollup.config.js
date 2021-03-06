@@ -5,7 +5,7 @@ import { terser } from 'rollup-plugin-terser';
 
 const optionsForPackage = [''];
 const createPlugins = () => {
-  return [typescript(), terser(), resolve(), commonjs({ include: /node_modules/ })];
+  return [typescript(), resolve(), commonjs({ include: /node_modules/ })];
 };
 
 const createConfig = () => {
@@ -25,11 +25,31 @@ const createConfig = () => {
     list.push({
       input: `./src${option}/index.ts`,
       output: {
+        file: `./lib${option}/index.min.js`,
+        format: 'esm',
+        exports: 'named',
+      },
+      plugins: [...createPlugins(), terser()],
+    });
+
+    list.push({
+      input: `./src${option}/index.ts`,
+      output: {
         file: `./lib${option}/index.amd.js`,
         format: 'amd',
         exports: 'named',
       },
       plugins: createPlugins(),
+    });
+
+    list.push({
+      input: `./src${option}/index.ts`,
+      output: {
+        file: `./lib${option}/index.amd.min.js`,
+        format: 'amd',
+        exports: 'named',
+      },
+      plugins: [...createPlugins(), terser()],
     });
   });
 
