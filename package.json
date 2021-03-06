@@ -1,6 +1,6 @@
 {
   "name": "pixi-controller",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Set of controls for Pixi.js to facilitate general handling of external events.",
   "main": "lib/index.amd.js",
   "module": "lib/index.js",
