@@ -2,7 +2,7 @@
 
 ```js
 import * as PIXI from 'pixi.js';
-import Controller, { BUTTON } from 'pixi-controller';
+import Controller, { BUTTON, PLAYER } from 'pixi-controller';
 
 const app = new PIXI.Application();
 document.body.appendChild(app.view);
@@ -11,6 +11,8 @@ app.loader.add('example', 'example.jpg').load((loader, resources) => {
     const example = new PIXI.Sprite(resources.example.texture);
 
     app.stage.addChild(example);
+
+    Controller.Mouse.prevent();
 
     app.ticker.add(() => {
       if(Controller.Mouse.isButtonDown(BUTTON.LEFT)) {
@@ -21,13 +23,13 @@ app.loader.add('example', 'example.jpg').load((loader, resources) => {
         console.log('right')
       }
       
-      if (Controller.Keyboard.isKeyDown('ArrowLeft', 'KeyA'))
+      if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT))
         example.x -= 1;
-      if (Controller.Keyboard.isKeyDown('ArrowRight', 'KeyD'))
+      if (Controller.Keyboard.isKeyDown(...PLAYER.RIGHT))
         example.x += 1;
-      if (Controller.Keyboard.isKeyDown('ArrowUp', 'KeyW'))
+      if (Controller.Keyboard.isKeyDown(...PLAYER.UP))
         example.y -= 1;
-      if (Controller.Keyboard.isKeyDown('ArrowDown', 'KeyS'))
+      if (Controller.Keyboard.isKeyDown(...PLAYER.DOWN))
         example.y += 1;
 
       Controller.update();

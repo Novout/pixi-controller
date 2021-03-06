@@ -13,7 +13,8 @@ module.exports = {
       '/content': [
         { text: 'Controller', link: '/content/controller' },
         { text: 'Keyboard', link: '/content/keyboard' },
-        { text: 'Mouse', link: '/content/mouse' }
+        { text: 'Mouse', link: '/content/mouse' },
+        { text: 'Utils', link: '/content/utils' }
       ],
       '/examples': [
         { text: 'Simple Context', link: '/examples/simple-context' }

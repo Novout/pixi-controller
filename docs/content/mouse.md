@@ -1,11 +1,5 @@
 # Mouse
 
-## .Button
-
-.Button = {LEFT: 0, MIDDLE: 1, RIGHT: 2, FOURTH: 3, FIFTH: 4}
-
-Bind for specific button.
-
 ## .isButtonDown(Button.Code)
 
 Checks if the key is held.

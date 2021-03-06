@@ -91,7 +91,7 @@ Callback when any key in condition.
 Callback when a particular key in condition.
 
 ```js
-import Controller from 'pixi.js-controller';
+import Controller from 'pixi-controller';
 
 const args = ['pressed', 'released', 'down', 'pressed_KeyI', 'released_KeyI', 'down_KeyI'];
 

@@ -5,3 +5,10 @@ export interface MouseButton {
   FOURTH: number;
   FIFTH: number;
 }
+
+export interface PlayerKeyboard {
+  UP: Array<string>;
+  DOWN: Array<string>;
+  LEFT: Array<string>;
+  RIGHT: Array<string>;
+}

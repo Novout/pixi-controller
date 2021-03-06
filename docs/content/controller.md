@@ -25,7 +25,7 @@ get canvas in controller
 set new canvas in controller
 
 ```js
-// Error
+// Wrong
 import * as PIXI from 'pixi.js';
 import Controller from 'pixi-controller';
 
