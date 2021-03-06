@@ -11,4 +11,6 @@ export interface PlayerKeyboard {
   DOWN: Array<string>;
   LEFT: Array<string>;
   RIGHT: Array<string>;
+  INVENTORY: Array<string>;
+  BAR: Array<string>;
 }
