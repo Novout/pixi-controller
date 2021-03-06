@@ -37,4 +37,16 @@ export class PIXIController {
   public getContext(): HTMLCanvasElement {
     return this.Canvas;
   }
+
+  public prevent(): void {
+    this.Canvas.removeEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+
+    this.Canvas.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    });
+  }
 }

@@ -12,7 +12,7 @@ app.loader.add('example', 'example.jpg').load((loader, resources) => {
 
     app.stage.addChild(example);
 
-    Controller.Mouse.prevent();
+    Controller.Mouse.prevent(BUTTON.RIGHT);
 
     app.ticker.add(() => {
       if(Controller.Mouse.isButtonDown(BUTTON.LEFT)) {

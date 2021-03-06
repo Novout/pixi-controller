@@ -16,6 +16,10 @@ Ensure to use this for correct event handling at the end of the game loop.
 
 Insert events on a new canvas, deleting older events
 
+## .prevent()
+
+Prevent default all menu events
+
 ## .getContext()
 
 get canvas in controller
@@ -43,6 +47,8 @@ const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 app.load((loader, resources) => {
+
+  // ...
 
   Controller.setContext(app.view);
   console.log(Controller.getContext());

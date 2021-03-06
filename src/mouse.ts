@@ -1,7 +1,5 @@
 import Events from 'nom-events';
-import { MouseButton } from './types';
 export default class Mouse {
-  public Button: MouseButton;
   private canvasElement: HTMLCanvasElement;
   private posLocalY = 0;
   private posLocalX = 0;
@@ -9,7 +7,14 @@ export default class Mouse {
   private posGlobalY = 0;
   private buttonStates: Map<() => MouseEvent, any>;
   private events: any;
+  private _prevent: Record<string, boolean | any> = {
+    value: false,
+    code: [],
+  };
   private mouseMoveListener = (event: MouseEvent) => {
+    const buttonCode = event.button;
+    this.preventMiddle(buttonCode, event);
+
     if (this.posLocalX != event.clientX || this.posLocalY != event.clientY) {
       this.events.call('move', event.clientX, this.posLocalY);
       this.events.call('moveLocal', event.clientX, this.posLocalY);
@@ -25,6 +30,8 @@ export default class Mouse {
   };
   private mouseDownListener = (event: any) => {
     const buttonCode = event.button;
+    this.preventMiddle(buttonCode, event);
+
     if (!this.buttonStates.get(buttonCode)) {
       event.posLocalX = this.getPosLocalX();
       event.posLocalY = this.getPosLocalY();
@@ -35,6 +42,8 @@ export default class Mouse {
   };
   private mouseUpListener = (event: any) => {
     const buttonCode = event.button;
+    this.preventMiddle(buttonCode, event);
+
     event = this.buttonStates.get(buttonCode);
     if (event) {
       event.wasReleased = true;
@@ -62,9 +71,11 @@ export default class Mouse {
       );
     }
   };
+  private mouseMenuContext = (event: MouseEvent) => {
+    this.preventMiddle(event.button, event);
+  };
 
   constructor(canvas: HTMLCanvasElement) {
-    this.Button = { LEFT: 0, MIDDLE: 1, RIGHT: 2, FOURTH: 3, FIFTH: 4 };
     this.buttonStates = new Map();
     this.events = new Events();
     this.canvasElement = canvas;
@@ -76,6 +87,8 @@ export default class Mouse {
     this.canvasElement.addEventListener('mousedown', this.mouseDownListener);
 
     this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
+
+    this.canvasElement.addEventListener('contextmenu', this.mouseMenuContext);
   }
 
   public getMousePos(event: any) {
@@ -125,11 +138,15 @@ export default class Mouse {
 
     this.canvasElement.removeEventListener('mouseup', this.mouseUpListener);
 
+    this.canvasElement.removeEventListener('contextmenu', this.mouseMenuContext);
+
     this.canvasElement.addEventListener('mousemove', this.mouseMoveListener);
 
     this.canvasElement.addEventListener('mousedown', this.mouseDownListener);
 
     this.canvasElement.addEventListener('mouseup', this.mouseUpListener);
+
+    this.canvasElement.addEventListener('contextmenu', this.mouseMenuContext);
   }
 
   public update(): void {
@@ -204,15 +221,24 @@ export default class Mouse {
     return result;
   }
 
-  public prevent(): void {
-    this.canvasElement.removeEventListener('contextmenu', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+  public prevent(...args: Array<number>): void {
+    this._prevent.value = true;
+    args.forEach((arg: number) => {
+      this._prevent.code.push(arg);
     });
+  }
 
-    this.canvasElement.addEventListener('contextmenu', (event) => {
-      event.preventDefault();
-      event.stopPropagation();
+  public preventRemove() {
+    this._prevent.value = false;
+    this._prevent.code = [];
+  }
+
+  private preventMiddle(button: number, event: MouseEvent): void {
+    this._prevent.code.forEach((cd: number) => {
+      if (this._prevent.value && button === cd) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
     });
   }
 }

@@ -1,24 +1,24 @@
 # Mouse
 
-## .isButtonDown(Button.Code)
+## .isButtonDown(BUTTON.Code)
 
 Checks if the key is held.
 
-## .isButtonPressed(Button.Code)
+## .isButtonPressed(BUTTON.Code)
 
 Checks if the key was pressed, holding will not trigger this more than once.
 
-## .isButtonReleased(Button.Code)
+## .isButtonReleased(BUTTON.Code)
 
 Checks whether the key was just released.
 
 ```js
 app.ticker.add(() => {
-  if(Controller.Mouse.isButtonDown(Controller.Mouse.Button.LEFT)) {
+  if(Controller.Mouse.isButtonDown(BUTTON.LEFT)) {
     console.log('left')
   }
 
-  if(Controller.Mouse.isButtonDown(2)) /* Controller.Mouse.Button.RIGHT */ {
+  if(Controller.Mouse.isButtonDown(2)) /* BUTTON.RIGHT */ {
     console.log('right')
   }
 
@@ -64,9 +64,30 @@ const newApp = new PIXI.Application();
 Controller.reset();
 ```
 
-## .prevent()
+## .prevent(args)
+
+args: Array with button codes
 
 Prevent mouse events in canvas/webgl context.
+
+```js
+// ...
+import Controller, { BUTTON } from 'pixi-controller';
+// ...
+
+app.loader.load((loader, resources) => {
+
+    Controller.Mouse.prevent(BUTTON.RIGHT);
+
+    app.ticker.add(() => {
+      Controller.update();
+    });
+});
+```
+
+## .preventRemove()
+
+Remove prevent events
 
 ## .events.on(['pressed', 'released', 'down'], null, (buttonCode, event, mouseX, mouseY)
 
@@ -77,7 +98,7 @@ Callback when any key is pressed/released/down.
 Callback when a particular key is pressed/released/down.
 
 ```js
-import Controller from 'pixi.js-controller';
+import Controller from 'pixi-controller';
 
 const args = ['pressed', 'released', 'down'];
 
