@@ -1,9 +1,10 @@
 {
   "name": "pixi-controller",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Set of controls for Pixi.js to facilitate general handling of external events.",
-  "main": "lib/index.amd.js",
-  "module": "lib/index.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "bundle": "lib/index.iife.js",
   "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
@@ -17,9 +18,20 @@
     "docs:serve": "vitepress serve docs"
   },
   "keywords": [
-    "pixi",
-    "pixi.js"
+    "factory",
+    "pixi.js",
+    "graphics",
+    "rendering",
+    "webgl"
   ],
+  "files": [
+    "lib",
+    "package.json"
+  ],
+  "bugs": {
+    "url": "https://github.com/Novout/pixi-controller/issues"
+  },
+  "homepage": "https://novout.github.io/pixi-controller/",
   "author": "Novout",
   "license": "MIT",
   "dependencies": {
@@ -27,6 +39,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@types/jsdom": "^16.2.6",
     "@types/node": "^14.14.22",
@@ -41,16 +54,13 @@
     "pixi.js": "^5.3.8",
     "prettier": "^2.2.1",
     "rollup": "^2.38.1",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-dts": "^2.0.1",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.29.0",
     "typescript": "^4.1.3",
     "vitepress": "^0.12.2"
   },
-  "files": [
-    "lib",
-    "package.json"
-  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
