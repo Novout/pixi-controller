@@ -33,7 +33,7 @@ const createConfig = () => {
         exports: 'named',
         banner,
         sourcemap: true,
-        name: '_pixi_factory',
+        name: '_pixi_controller',
       },
       plugins: [...createPlugins()],
     });
