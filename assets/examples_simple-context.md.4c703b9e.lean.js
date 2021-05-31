@@ -1,0 +1,1 @@
+import{o as n,c as s,d as a}from"./app.ca37ea7b.js";const p='{"title":"Simple Context","description":"","frontmatter":{},"relativePath":"examples/simple-context.md","lastUpdated":1622475588142}',t={},o=a('',2);t.render=function(a,p,t,c,e,u){return n(),s("div",null,[o])};export default t;export{p as __pageData};
