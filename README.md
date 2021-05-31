@@ -17,12 +17,45 @@ or
 yarn add pixi.js pixi-controller
 ```
 
-## TODO
+## Simple Example
 
-- [x] Pixi.js-mouse and Pixi.js-keyboard Implement
-- [ ] Control Event Listeners
-- [ ] Internal Observables
+```js
+import * as PIXI from 'pixi.js';
+import Controller, { BUTTON, PLAYER } from 'pixi-controller';
+
+const app = new PIXI.Application();
+document.body.appendChild(app.view);
+
+app.loader.add('example', 'example.jpg').load((loader, resources) => {
+    const example = new PIXI.Sprite(resources.example.texture);
+
+    app.stage.addChild(example);
+
+    Controller.Mouse.prevent(BUTTON.RIGHT);
+
+    app.ticker.add(() => {
+      if(Controller.Mouse.isButtonDown(BUTTON.LEFT)) {
+        console.log('left')
+      }
+
+      if(Controller.Mouse.isButtonDown(BUTTON.RIGHT)) {
+        console.log('right')
+      }
+      
+      if (Controller.Keyboard.isKeyDown(...PLAYER.LEFT))
+        example.x -= 1;
+      if (Controller.Keyboard.isKeyDown(...PLAYER.RIGHT))
+        example.x += 1;
+      if (Controller.Keyboard.isKeyDown(...PLAYER.UP))
+        example.y -= 1;
+      if (Controller.Keyboard.isKeyDown(...PLAYER.DOWN))
+        example.y += 1;
+
+      Controller.update();
+    });
+});
+```
 
 ## Credits
 
-[-non-](https://www.npmjs.com/~-nom-) for creation pixi.js-mouse and pixi.js-keyboard
+[-nom-](https://github.com/c-ridgway) for creation pixi.js-mouse and pixi.js-keyboard
