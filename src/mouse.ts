@@ -1,5 +1,5 @@
 import Events from 'nom-events';
-export default class Mouse {
+export class Mouse {
   private canvasElement: HTMLCanvasElement;
   private posLocalY = 0;
   private posLocalX = 0;

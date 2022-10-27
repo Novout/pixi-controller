@@ -1,5 +1,5 @@
-import Mouse from './mouse';
-import Keyboard from './keyboard';
+import { Mouse } from './mouse';
+import { Keyboard } from './keyboard';
 
 export class PIXIController {
   // @ts-ignore
@@ -10,11 +10,9 @@ export class PIXIController {
   public Keyboard: Keyboard;
 
   constructor(canvas?: HTMLCanvasElement) {
-    setTimeout(() => {
-      this.Canvas = canvas || document.getElementsByTagName('canvas')[0];
-      this.Mouse = new Mouse(canvas || this.Canvas);
-      this.Keyboard = new Keyboard();
-    }, 0);
+    this.Canvas = canvas || document.getElementsByTagName('canvas')[0];
+    this.Mouse = new Mouse(canvas || this.Canvas);
+    this.Keyboard = new Keyboard();
   }
 
   public update(): void {
