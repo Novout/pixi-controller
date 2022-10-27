@@ -13,9 +13,6 @@
   "scripts": {
     "build": "rimraf dist && tsup",
     "format": "prettier src/**/*.ts --write",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:serve": "vitepress serve docs",
     "postpublish": "git push && git push --tags"
   },
   "keywords": [
@@ -45,7 +42,6 @@
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "tsup": "^6.3.0",
-    "typescript": "^4.8.4",
-    "vitepress": "^0.12.2"
+    "typescript": "^4.8.4"
   }
 }
