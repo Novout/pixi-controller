@@ -4,3 +4,4 @@ lib/**
 docs/.vitepress/dist
 api
 node_modules
+dist
