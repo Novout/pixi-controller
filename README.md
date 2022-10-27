@@ -21,12 +21,13 @@ yarn add pixi.js pixi-controller
 
 ```js
 import * as PIXI from 'pixi.js';
-import Controller, { BUTTON, PLAYER } from 'pixi-controller';
+import { PIXIController, BUTTON, PLAYER } from 'pixi-controller';
 
 const app = new PIXI.Application();
 document.body.appendChild(app.view);
 
 app.loader.add('example', 'example.jpg').load((loader, resources) => {
+    const Controller = new PIXIController();
     const example = new PIXI.Sprite(resources.example.texture);
 
     app.stage.addChild(example);

@@ -9,10 +9,10 @@ export class PIXIController {
   // @ts-ignore
   public Keyboard: Keyboard;
 
-  constructor() {
+  constructor(canvas?: HTMLCanvasElement) {
     setTimeout(() => {
-      this.Canvas = document.getElementsByTagName('canvas')[0];
-      this.Mouse = new Mouse(this.Canvas);
+      this.Canvas = canvas || document.getElementsByTagName('canvas')[0];
+      this.Mouse = new Mouse(canvas || this.Canvas);
       this.Keyboard = new Keyboard();
     }, 0);
   }
